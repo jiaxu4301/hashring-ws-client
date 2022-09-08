@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: ws-client
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    # 每10秒向注册中心发送心跳,超过10秒没发送心跳,Eureka认为服务宕机了
+    # 服务续约(renew)的间隔
+    lease-renewal-interval-in-seconds: 30
+    # 服务失效时间
+    lease-expiration-duration-in-seconds: 90
+    non-secure-port: ${server.port}
+  client:
+    # 客户端从Eureka注册中心同步节点信息的时间间隔
+    registry-fetch-interval-seconds: 30
+    service-url:
+      default-zone: http://localhost:8761/eureka/
+
